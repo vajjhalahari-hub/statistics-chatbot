@@ -56,25 +56,9 @@
       align-items: flex-start;
     }
 
-    .header-left h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .header-left p {
-      font-size: 13px;
-      color: var(--subtext);
-      margin-top: 4px;
-      max-width: 500px;
-      line-height: 1.5;
-    }
-
-    .team {
-      font-size: 12px;
-      color: var(--subtext);
-      margin-top: 6px;
-    }
+    .header-left h1 { font-size: 22px; font-weight: 700; color: var(--primary); }
+    .header-left p { font-size: 13px; color: var(--subtext); margin-top: 4px; max-width: 500px; line-height: 1.5; }
+    .team { font-size: 12px; color: var(--subtext); margin-top: 6px; }
 
     .status-badge {
       display: inline-block;
@@ -84,7 +68,6 @@
       font-weight: 600;
       margin-top: 6px;
     }
-
     .status-badge.online  { background: #d4edda; color: #155724; }
     .status-badge.offline { background: #f8d7da; color: #721c24; }
 
@@ -124,27 +107,16 @@
       line-height: 1.7;
     }
 
-    .user .bubble {
-      background: var(--primary);
-      color: white;
-      border-bottom-right-radius: 4px;
-    }
-
-    .bot .bubble {
-      background: var(--bot-bubble);
-      color: var(--bot-text);
-      border-bottom-left-radius: 4px;
-    }
+    .user .bubble { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+    .bot  .bubble { background: var(--bot-bubble); color: var(--bot-text); border-bottom-left-radius: 4px; }
 
     .spinner {
-      display: flex;
-      gap: 5px;
+      display: flex; gap: 5px;
       padding: 12px 16px;
       background: var(--bot-bubble);
       border-radius: 16px;
       border-bottom-left-radius: 4px;
     }
-
     .spinner span {
       width: 8px; height: 8px;
       background: var(--subtext);
@@ -160,8 +132,7 @@
     }
 
     .input-row {
-      display: flex;
-      gap: 8px;
+      display: flex; gap: 8px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -169,25 +140,18 @@
     }
 
     #inp {
-      flex: 1;
-      border: none;
-      outline: none;
+      flex: 1; border: none; outline: none;
       background: transparent;
-      font-size: 15px;
-      color: var(--text);
+      font-size: 15px; color: var(--text);
       padding: 4px 8px;
     }
     #inp::placeholder { color: var(--subtext); }
 
     .send-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
+      background: var(--primary); color: white;
+      border: none; border-radius: 10px;
+      padding: 10px 20px; cursor: pointer;
+      font-size: 14px; font-weight: 600;
       transition: background 0.2s;
     }
     .send-btn:hover { background: var(--primary-dark); }
@@ -204,33 +168,21 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-
-    .config-bar label {
-      font-size: 13px;
-      color: var(--subtext);
-      white-space: nowrap;
-    }
-
+    .config-bar label { font-size: 13px; color: var(--subtext); white-space: nowrap; }
     .config-bar input {
-      flex: 1;
-      min-width: 200px;
+      flex: 1; min-width: 200px;
       padding: 6px 10px;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: var(--bg);
       color: var(--text);
-      font-size: 13px;
-      outline: none;
+      font-size: 13px; outline: none;
     }
-
     .save-btn {
       padding: 6px 14px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
+      background: var(--primary); color: white;
+      border: none; border-radius: 8px;
+      cursor: pointer; font-size: 13px;
     }
 
     .footer {
@@ -244,7 +196,6 @@
 <body>
   <div class="container">
 
-    <!-- API Config Bar -->
     <div class="config-bar">
       <label>API URL:</label>
       <input type="text" id="apiUrl" placeholder="https://your-ngrok-url.ngrok-free.app" />
@@ -252,7 +203,6 @@
       <span id="statusBadge" class="status-badge offline">Offline</span>
     </div>
 
-    <!-- Header -->
     <header>
       <div class="header-left">
         <h1>Statistics Chatbot</h1>
@@ -265,14 +215,12 @@
       </div>
     </header>
 
-    <!-- Chat Window -->
     <div class="chat-box" id="chat">
       <div class="message bot">
-        <span class="bubble">Hi! I am your Statistics Chatbot. Ask me any statistics question and I will answer in English, Telugu, and Hindi. Make sure to set your API URL above first!</span>
+        <span class="bubble">Hi! I am your Statistics Chatbot. Ask me any statistics question and I will answer in English, Telugu, and Hindi. Please set your API URL above and click Save first!</span>
       </div>
     </div>
 
-    <!-- Input -->
     <div class="input-row">
       <input id="inp" placeholder="Ask a statistics question..." onkeydown="if(event.key==='Enter' && !event.shiftKey) send()" />
       <button class="send-btn" id="sendbtn" onclick="send()">Send</button>
@@ -285,7 +233,6 @@
   </div>
 
   <script>
-    // Load saved API URL
     let API_URL = localStorage.getItem('statsbot_api') || '';
     if (API_URL) {
       document.getElementById('apiUrl').value = API_URL;
@@ -300,8 +247,16 @@
 
     async function checkHealth() {
       const badge = document.getElementById('statusBadge');
+      badge.textContent = 'Checking...';
+      badge.className = 'status-badge offline';
       try {
-        const res = await fetch(API_URL + '/health', { method: 'GET' });
+        const res = await fetch(API_URL + '/health', {
+          method: 'GET',
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+            'Content-Type': 'application/json'
+          }
+        });
         const data = await res.json();
         if (data.status === 'running') {
           badge.textContent = 'Online';
@@ -310,26 +265,20 @@
           badge.textContent = 'Offline';
           badge.className = 'status-badge offline';
         }
-      } catch {
+      } catch (e) {
         badge.textContent = 'Offline';
         badge.className = 'status-badge offline';
       }
     }
 
-    function toggleDark() {
-      document.body.classList.toggle('dark');
-    }
-
-    function clearChat() {
-      document.getElementById('chat').innerHTML = '';
-    }
+    function toggleDark() { document.body.classList.toggle('dark'); }
+    function clearChat() { document.getElementById('chat').innerHTML = ''; }
 
     async function send() {
       if (!API_URL) {
         alert('Please set your API URL first and click Save!');
         return;
       }
-
       const inp = document.getElementById('inp');
       const btn = document.getElementById('sendbtn');
       const q = inp.value.trim();
@@ -338,13 +287,15 @@
       addMsg(q, 'user');
       inp.value = '';
       btn.disabled = true;
-
       const spinId = addSpinner();
 
       try {
         const res = await fetch(API_URL + '/chat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+          },
           body: JSON.stringify({ question: q })
         });
         const data = await res.json();
